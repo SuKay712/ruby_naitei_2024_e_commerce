@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :checkout, only: :create
   scope "(:locale)", locale: /en|vi/ do
     get "sessions/new"
     get "sessions/create"
@@ -12,6 +11,8 @@ Rails.application.routes.draw do
     post "checkout/create", to: "checkout#create"
     resources :products
     resources :users
+    resources :checkout, only: :create
+    resources :webhooks, only: :create
     resources :account_activations, only: :edit
     namespace :admin do
       resources :categories
