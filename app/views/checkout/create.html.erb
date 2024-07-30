@@ -1,0 +1,16 @@
+<%# create.html.erb %>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var stripe = Stripe('<%= Figaro.env.stripe_publishable_key %>');
+
+    stripe.redirectToCheckout({
+      sessionId: '<%= @session.id %>'
+    }).then(function (result) {
+      if (result.error) {
+        // Xử lý lỗi nếu có
+        console.error(result.error.message);
+      }
+    });
+  });
+</script>
